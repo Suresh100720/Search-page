@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+@layer base {
+  :root {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --accent: #ec4899;
+    --glow: rgba(99, 102, 241, 0.15);
+  }
+  
+  body {
+    @apply bg-slate-50 text-slate-900 min-h-screen font-sans;
+  }
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+}
+
+/* Custom premium classes that are hard to do with just tailwind utilities in a clean way */
+.premium-gradient-text {
+  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+}
+
+.premium-glass {
+  @apply bg-white/80 backdrop-blur-xl border border-white/50 shadow-xl;
+}
+
+.animate-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.premium-search .ant-input-wrapper {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+.premium-search .ant-input-affix-wrapper {
+  @apply !border-slate-100 !bg-white/80 !backdrop-blur-md !py-3 !px-5 !rounded-2xl transition-all duration-300;
+}
+
+.premium-search .ant-input-affix-wrapper-focused {
+  @apply !border-primary/30 !shadow-2xl !shadow-primary/10 !scale-[1.01];
+}
+
+.premium-search .ant-input-search-button {
+  @apply !h-auto !rounded-xl !ml-2 !bg-primary !border-primary hover:!bg-primary/90 transition-all duration-300 active:!scale-95 shadow-lg shadow-primary/20;
+}
+
+.premium-search .ant-input {
+  @apply !text-lg !font-medium;
+}
+
+/* Ant Design Overrides to match Tailwind theme */
+.ant-btn-primary {
+  @apply !bg-primary !border-primary hover:!bg-primary/90;
+}
+
+.ant-input-search .ant-input-search-button {
+  @apply !bg-primary !border-primary;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Sticky Sidebar */
+.sticky-top-fixed {
+  position: sticky;
+  top: 24px;
+  z-index: 1;
+}
+
+/* AG Grid Dashboard Style Overrides */
+.ag-theme-custom {
+  --ag-header-background-color: #f8fafc;
+  --ag-header-foreground-color: #64748b;
+  --ag-header-cell-hover-background-color: #f1f5f9;
+  --ag-row-hover-color: #f8fafc;
+  --ag-selected-row-background-color: #f1f5f9;
+  --ag-border-color: #f1f5f9;
+  --ag-border-radius: 12px;
+  --ag-font-size: 14px;
+  --ag-font-family: 'Inter', sans-serif;
+}
+
+.ag-theme-custom .ag-header-cell-label {
+  @apply font-bold uppercase tracking-wider text-[11px];
+}
+
+.ag-theme-custom .ag-header {
+  @apply border-b border-slate-100;
+}
+
+.ag-theme-custom .ag-row {
+  @apply border-b border-slate-50 transition-colors duration-200;
+}
+
+.ag-theme-custom .ag-cell {
+  @apply flex items-center px-4;
+}
+
+.ag-theme-custom .ag-checkbox-input-wrapper.ag-checked::after {
+  @apply text-primary;
+}
+
+.ag-theme-custom .ag-paging-panel {
+  @apply border-t border-slate-100 bg-white px-6 py-4 text-slate-500;
+}
