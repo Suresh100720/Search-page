@@ -1,38 +1,70 @@
-Candidate Search & Management Application
-📌 Overview
-This project is a Search Page and Candidate Management System built using React (Vite) with a Node.js backend. It provides a powerful and responsive interface to search, filter, and manage candidates with real-time results and advanced UI components.
-🚀 Features
-🔍 Search & Filtering
-Search candidates using Ant Design Input.Search
-Debounced search input for real-time results
-Facet filters using checkboxes and tag filters
-Dynamic filtering with live updates
-🎯 UI & Data Handling
-Highlight matched search text in result cards
-Display candidates in:
-Card View
-Table View (AG Grid)
-Responsive UI using Bootstrap
-📊 Candidate Management
-Add new candidates using form
-View all candidate details
-Update candidate information
-Delete candidates
-⚡ Performance & UX
-Smooth and fast search experience
-Optimized rendering with debouncing
-Clean and user-friendly interface
-🛠️ Tech Stack
-🔹 Frontend
-React (Vite)
-Ant Design (Search, Select, UI components)
-Bootstrap (Responsive design)
-AG Grid (Advanced data table)
-🔹 Backend
-Node.js
-Express
-MongoDB (Mongoose)
-📁 Project Structure
+# 🔍 Candidate Search & Management Application
+
+## 📌 Overview
+
+This project is a **Search Page and Candidate Management System** built using **React (Vite)** with a **Node.js backend**. It provides a powerful and responsive interface to search, filter, and manage candidates with real-time results and advanced UI components.
+
+---
+
+## 🚀 Features
+
+### 🔍 Search & Filtering
+
+* Search candidates using **Ant Design `Input.Search`**
+* **Debounced search input** for real-time results
+* **Facet filters** using checkboxes and tag filters
+* Dynamic filtering with live updates
+
+---
+
+### 🎯 UI & Data Handling
+
+* Highlight matched search text in result cards
+* Display candidates in:
+
+  * **Card View**
+  * **Table View (AG Grid)**
+* Responsive UI using **Bootstrap**
+
+---
+
+### 📊 Candidate Management
+
+* Add new candidates using form
+* View all candidate details
+* Update candidate information
+* Delete candidates
+
+---
+
+### ⚡ Performance & UX
+
+* Smooth and fast search experience
+* Optimized rendering with debouncing
+* Clean and user-friendly interface
+
+---
+
+## 🛠️ Tech Stack
+
+### 🔹 Frontend
+
+* React (Vite)
+* Ant Design (Search, Select, UI components)
+* Bootstrap (Responsive design)
+* AG Grid (Advanced data table)
+
+### 🔹 Backend
+
+* Node.js
+* Express
+* MongoDB (Mongoose)
+
+---
+
+## 📁 Project Structure
+
+```bash id="y4k6wn"
 UI/
 │
 ├── client/
@@ -79,37 +111,75 @@ UI/
 ├── eslint.config.js
 ├── package.json
 └── README.md
-⚙️ Installation & Setup
-🔹 1. Clone Repository
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 🔹 1. Clone Repository
+
+```bash id="s9ycbv"
 git clone https://github.com/Suresh100720/Search-page.git
 cd UI
-🔹 2. Run Backend
+```
+
+---
+
+### 🔹 2. Run Backend
+
+```bash id="1h1p2k"
 cd server
 npm install
 npm run dev
-🔹 3. Run Frontend
+```
+
+---
+
+### 🔹 3. Run Frontend
+
+```bash id="1w5k5k"
 cd client
 npm install
 npm run dev
-🔄 How It Works
-User enters search query
-Debounced input triggers API call
-Backend fetches filtered data
-UI updates instantly with:
-Highlighted results
-Updated filters
-Grid & card views
-🧠 Key Concepts Used
-Debouncing (optimized search)
-React Hooks & Custom Hooks
-API Integration (Axios)
-Component-based architecture
-Data filtering & faceting
-Responsive UI design
-⚠️ Important Notes
-Do not commit .env file
-Ignore node_modules
-Keep sensitive data secure
-👨‍💻 Author
-Suresh
- 
+```
+
+---
+
+## 🔄 How It Works
+
+1. User enters search query
+2. Debounced input triggers API call
+3. Backend fetches filtered data
+4. UI updates instantly with:
+
+   * Highlighted results
+   * Updated filters
+   * Grid & card views
+
+---
+
+## 🧠 Key Concepts Used
+
+* Debouncing (optimized search)
+* React Hooks & Custom Hooks
+* API Integration (Axios)
+* Component-based architecture
+* Data filtering & faceting
+* Responsive UI design
+
+---
+
+## ⚠️ Important Notes
+
+* Do not commit `.env` file
+* Ignore `node_modules`
+* Keep sensitive data secure
+
+---
+
+## 👨‍💻 Author
+
+**Suresh**
+
+
