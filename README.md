@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-This project is a **Search Page and Candidate Management System** built using **React (Vite)** with a **Node.js backend**. It provides a powerful and responsive interface to search, filter, and manage candidates with real-time results and advanced UI components.
+This project is a **Search Page and Candidate Management System** built using **React (Vite)** with a **Node.js backend**. It provides a powerful and responsive interface to search, filter, and manage candidates with real-time results and optimized performance.
 
 ---
 
@@ -13,13 +13,13 @@ This project is a **Search Page and Candidate Management System** built using **
 * Search candidates using **Ant Design `Input.Search`**
 * **Debounced search input** for real-time results
 * **Facet filters** using checkboxes and tag filters
-* Dynamic filtering with live updates
+* Combined search + filters for dynamic results
 
 ---
 
 ### 🎯 UI & Data Handling
 
-* Highlight matched search text in result cards
+* Highlight matched search text in results
 * Display candidates in:
 
   * **Card View**
@@ -30,18 +30,21 @@ This project is a **Search Page and Candidate Management System** built using **
 
 ### 📊 Candidate Management
 
-* Add new candidates using form
-* View all candidate details
-* Update candidate information
-* Delete candidates
+* Add new candidates
+* Fetch all candidates
+* Update candidate details
+* Delete candidate records
+* Bulk delete support
 
 ---
 
-### ⚡ Performance & UX
+### ⚡ Performance & Optimization
 
-* Smooth and fast search experience
-* Optimized rendering with debouncing
-* Clean and user-friendly interface
+* **Debounced API calls** to reduce unnecessary requests
+* **MongoDB indexing** for faster queries
+* **Query tuning using `.explain()`**
+* Efficient filtering using indexed fields (role, location, status)
+* Optimized rendering to reduce re-renders
 
 ---
 
@@ -50,28 +53,33 @@ This project is a **Search Page and Candidate Management System** built using **
 ### 🔹 Frontend
 
 * React (Vite)
-* Ant Design (Search, Select, UI components)
-* Bootstrap (Responsive design)
-* AG Grid (Advanced data table)
+* Ant Design
+* Bootstrap
+* AG Grid
 
 ### 🔹 Backend
 
 * Node.js
 * Express
 * MongoDB (Mongoose)
+* Elasticsearch (for search support)
 
 ---
 
 ## 📁 Project Structure
 
-```bash id="y4k6wn"
-UI/
+```
+ui/
 │
 ├── client/
 │   ├── node_modules/
 │   ├── public/
+│   │   ├── favicon.svg
+│   │   └── icons.svg
+│   │
 │   ├── src/
 │   │   ├── assets/
+│   │   │
 │   │   ├── components/
 │   │   │   ├── AgGridTable.jsx
 │   │   │   ├── CandidateCard.jsx
@@ -80,7 +88,7 @@ UI/
 │   │   │   ├── CandidateGrid.jsx
 │   │   │   ├── FacetFilters.jsx
 │   │   │   ├── HighlightText.jsx
-│   │   │   ├── SearchHeader.jsx
+│   │   │   └── SearchHeader.jsx
 │   │   │
 │   │   ├── hooks/
 │   │   │   └── useCandidates.js
@@ -97,16 +105,31 @@ UI/
 │   └── vite.config.js
 │
 ├── server/
+│   ├── config/
+│   │   └── elasticsearch.js
+│   │
+│   ├── controllers/
+│   │   └── candidateController.js
+│   │
+│   ├── data/
+│   │   └── mockCandidates.js
+│   │
 │   ├── models/
 │   │   └── Candidate.js
 │   │
+│   ├── routes/
+│   │   └── candidateRoutes.js
+│   │
+│   ├── tests/
+│   │   └── api.test.js
+│   │
 │   ├── node_modules/
 │   ├── .env
+│   ├── index-candidates.js
 │   ├── index.js
 │   ├── package.json
 │   └── package-lock.json
 │
-├── node_modules/
 ├── .gitignore
 ├── eslint.config.js
 ├── package.json
@@ -117,28 +140,24 @@ UI/
 
 ## ⚙️ Installation & Setup
 
-### 🔹 1. Clone Repository
+### 🔹 Clone Repository
 
-```bash id="s9ycbv"
+```bash
 git clone https://github.com/Suresh100720/Search-page.git
 cd UI
 ```
 
----
+### 🔹 Run Backend
 
-### 🔹 2. Run Backend
-
-```bash id="1h1p2k"
+```bash
 cd server
 npm install
 npm run dev
 ```
 
----
+### 🔹 Run Frontend
 
-### 🔹 3. Run Frontend
-
-```bash id="1w5k5k"
+```bash
 cd client
 npm install
 npm run dev
@@ -150,23 +169,128 @@ npm run dev
 
 1. User enters search query
 2. Debounced input triggers API call
-3. Backend fetches filtered data
-4. UI updates instantly with:
-
-   * Highlighted results
-   * Updated filters
-   * Grid & card views
+3. Backend processes filters and search
+4. MongoDB/Elasticsearch returns optimized results
+5. UI updates instantly
 
 ---
 
-## 🧠 Key Concepts Used
+## 🧠 Performance Review
 
-* Debouncing (optimized search)
-* React Hooks & Custom Hooks
-* API Integration (Axios)
+* Used **MongoDB indexing** to avoid full collection scans (COLLSCAN → IXSCAN)
+* Verified query performance using:
+
+  ```js
+  db.candidates.find({ role: "Developer" }).explain("executionStats")
+  ```
+* Implemented **text index** for full-text search
+* Reduced API calls using debounce (500ms)
+* Optimized query filters using indexed fields
+
+---
+
+## 🧪 Unit Testing (Jest)
+
+* Used **Jest + Supertest** for API testing
+* Mocked MongoDB and Elasticsearch
+* Tested routes:
+
+  * GET candidates
+  * POST candidate
+  * Search API
+  * Health API
+
+### Run Tests
+
+```bash
+cd server
+npm test
+```
+
+---
+
+## 📡 API Endpoints (with curl)
+
+### 🔹 Get Candidates
+
+```bash
+curl http://localhost:5000/api/candidates
+```
+
+---
+
+### 🔹 Search Candidates
+
+```bash
+curl -X POST http://localhost:5000/api/candidates/search \
+-H "Content-Type: application/json" \
+-d '{"query":"developer"}'
+```
+
+---
+
+### 🔹 Get Facets
+
+```bash
+curl http://localhost:5000/api/candidates/facets
+```
+
+---
+
+### 🔹 Create Candidate
+
+```bash
+curl -X POST http://localhost:5000/api/candidates \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "Ram",
+  "email": "ram@gmail.com",
+  "role": "Developer",
+  "skills": ["React"],
+  "location": "Hyderabad",
+  "status": "Applied"
+}'
+```
+
+---
+
+### 🔹 Update Candidate
+
+```bash
+curl -X PUT http://localhost:5000/api/candidates/:id \
+-H "Content-Type: application/json" \
+-d '{"role":"Senior Developer"}'
+```
+
+---
+
+### 🔹 Delete Candidate
+
+```bash
+curl -X DELETE http://localhost:5000/api/candidates/:id
+```
+
+---
+
+### 🔹 Bulk Delete
+
+```bash
+curl -X POST http://localhost:5000/api/candidates/bulk-delete \
+-H "Content-Type: application/json" \
+-d '{"ids":["id1","id2"]}'
+```
+
+---
+
+## 🧠 Key Concepts Implemented
+
+* Full-stack development (React + Node.js + MongoDB)
+* Debounced search optimization
+* Faceted filtering system
+* REST API design
 * Component-based architecture
-* Data filtering & faceting
-* Responsive UI design
+* Data handling with AG Grid
+* Indexing and query optimization
 
 ---
 
@@ -174,7 +298,7 @@ npm run dev
 
 * Do not commit `.env` file
 * Ignore `node_modules`
-* Keep sensitive data secure
+* Keep API keys secure
 
 ---
 
